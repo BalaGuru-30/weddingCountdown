@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Forever Countdown 💍</title>
+
+    <style>
+      :root {
+        --pink: #ff6f91;
+        --peach: #ffc75f;
+        --purple: #845ec2;
+        --glass: rgba(255, 255, 255, 0.15);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        color: white;
+        padding: 16px;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 420px;
+        background: rgba(0, 0, 0, 0.28);
+        backdrop-filter: blur(14px);
+        border-radius: 24px;
+        padding: 28px 22px 32px;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+        animation: fadeIn 1.2s ease;
+      }
+
+      h1 {
+        font-size: clamp(1.8rem, 5vw, 2.3rem);
+        margin: 0 0 8px;
+        font-weight: 700;
+      }
+
+      .subtitle {
+        font-size: 1rem;
+        opacity: 0.9;
+        margin-bottom: 28px;
+      }
+
+      .timer {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        animation: heartbeat 2s infinite;
+      }
+
+      .box {
+        background: var(--glass);
+        border-radius: 18px;
+        padding: 18px 10px;
+        text-align: center;
+      }
+
+      .number {
+        font-size: clamp(2.2rem, 8vw, 3rem);
+        font-weight: 800;
+        line-height: 1;
+      }
+
+      .label {
+        font-size: 0.85rem;
+        margin-top: 6px;
+        opacity: 0.85;
+        letter-spacing: 0.5px;
+      }
+
+      .message {
+        margin-top: 26px;
+        font-size: 1rem;
+        opacity: 0.95;
+      }
+
+      .heart {
+        color: #ff4d6d;
+        animation: pulse 1.5s infinite;
+      }
+
+      @keyframes heartbeat {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.015);
+        }
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.25);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(15px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Desktop enhancement */
+      @media (min-width: 768px) {
+        .timer {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container" id="container">
+      <h1>Our Big Day 💍</h1>
+      <div class="subtitle">Counting every second until forever</div>
+
+      <div class="timer">
+        <div class="box">
+          <div class="number" id="days">0</div>
+          <div class="label">DAYS</div>
+        </div>
+        <div class="box">
+          <div class="number" id="hours">0</div>
+          <div class="label">HOURS</div>
+        </div>
+        <div class="box">
+          <div class="number" id="minutes">0</div>
+          <div class="label">MINUTES</div>
+        </div>
+        <div class="box">
+          <div class="number" id="seconds">0</div>
+          <div class="label">SECONDS</div>
+        </div>
+      </div>
+
+      <div class="message">
+        Waiting for you, Roj <span class="heart">❤️</span>
+      </div>
+    </div>
+
+    <script>
+      const weddingTime = new Date("2026-05-28T07:30:00+05:30").getTime();
+
+      function tick() {
+        const now = new Date().getTime();
+        const diff = weddingTime - now;
+
+        if (diff <= 0) {
+          document.getElementById("container").innerHTML = `
+      <h1>💖 It’s Our Wedding Day 💖</h1>
+      <div class="subtitle">Forever starts now</div>
+      <div style="font-size:2.5rem;margin-top:20px;">👰🤵</div>
+    `;
+          return;
+        }
+
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const m = Math.floor((diff / (1000 * 60)) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+
+        days.textContent = d;
+        hours.textContent = h;
+        minutes.textContent = m;
+        seconds.textContent = s;
+      }
+
+      tick();
+      setInterval(tick, 1000);
+    </script>
+  </body>
+</html>
